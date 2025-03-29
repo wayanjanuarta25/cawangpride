@@ -6,6 +6,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperadminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GudangController;
+use App\Http\Controllers\SubJenisController;
+use App\Http\Controllers\SubSubJenisController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,6 +43,11 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/dashboard/superadmin', [SuperadminController::class, 'index'])->name('dashboard.superadmin');
     Route::get('/manage-users', [SuperadminController::class, 'manageUsers'])->name('manage.users');
     Route::get('/data-master', [SuperadminController::class, 'dataMaster'])->name('data.master');
+    
+    // Data Master
+    Route::resource('gudang', GudangController::class);
+    Route::resource('sub-jenis', SubJenisController::class);
+    Route::resource('sub-sub-jenis', SubSubJenisController::class);
 
     // Manajemen User
     Route::resource('/users', UserController::class);

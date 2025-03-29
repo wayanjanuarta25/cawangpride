@@ -77,25 +77,26 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('gudang.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Gudang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('sub-jenis.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Sub Jenis</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('sub-sub-jenis.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Sub Sub Jenis</p>
                             </a>
                         </li>
                     </ul>
                 </li>
+
 
                 <!-- Manajemen User (Superadmin Only) -->
                 @if (auth()->user()->role == 'superadmin')
