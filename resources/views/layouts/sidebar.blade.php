@@ -10,7 +10,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                 <!-- Dashboard -->
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.admin') }}" class="nav-link">
+                    <a href="{{ route('dashboard.superadmin') }}" class="nav-link">
                         <i class="nav-icon fas fa-chart-bar"></i>
                         <p>Dashboard</p>
                     </a>
@@ -27,15 +27,21 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('barang.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Barang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('barang.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tambah Barang</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('stok_barang.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Stok Barang</p>
                             </a>
                         </li>
                     </ul>
@@ -52,13 +58,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('barang_masuk.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Barang Masuk</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('barang_keluar.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Barang Keluar</p>
                             </a>
@@ -77,26 +83,37 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="{{ route('jenismateriil.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Jenis Materiil</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('subjenis.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sub Jenis</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('subsubjenis.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sub Sub Jenis</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('gudang.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Gudang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('sub-jenis.index') }}" class="nav-link">
+                            <a href="{{ route('status.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Sub Jenis</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('sub-sub-jenis.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Sub Sub Jenis</p>
+                                <p>Status</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-
 
                 <!-- Manajemen User (Superadmin Only) -->
                 @if (auth()->user()->role == 'superadmin')
@@ -125,7 +142,6 @@
                     </li>
                 @endif
 
-
                 <!-- Laporan -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -148,19 +164,12 @@
                                 <p>Laporan Barang Keluar</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Stok Barang</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
 
                 <!-- Logout -->
                 <li class="nav-item">
-                    <a href="{{ route('logout') }}" class="nav-link"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>Logout</p>
                     </a>
@@ -172,3 +181,4 @@
         </nav>
     </div>
 </aside>
+

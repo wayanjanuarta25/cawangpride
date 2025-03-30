@@ -2,63 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SubJenis;
 use Illuminate\Http\Request;
+use App\Models\JenisMateriil;
 
 class SubJenisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function index() {
+        $subJenis = SubJenis::all();
+        return view('data_master.subjenis.index', compact('subJenis'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create() 
     {
-        //
+        $jenisMateriil = JenisMateriil::all();
+        return view('data_master.subjenis.create', compact('jenisMateriil'));
     }
+    
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'jenis_materiil_id' => 'required|exists:jenis_materiil,id',
+            'nama' => 'required|string|max:255',
+        ]);
+    
+        SubJenis::create([
+            'jenis_materiil_id' => $request->jenis_materiil_id,
+            'nama' => $request->nama,
+        ]);
+    
+        return redirect()->route('subjenis.index')->with('success', 'Sub Jenis berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+    public function edit($id) {
+        $subJenis = SubJenis::findOrFail($id);
+        return view('data_master.subjenis.edit', compact('subJenis'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+    
+    public function update(Request $request, $id) {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+        ]);
+    
+        $subJenis = SubJenis::findOrFail($id);
+        $subJenis->update([
+            'nama' => $request->nama,
+        ]);
+    
+        return redirect()->route('subjenis.index')->with('success', 'Sub Jenis berhasil diperbarui');
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    
+    public function destroy($id) {
+        $subJenis = SubJenis::findOrFail($id);
+        $subJenis->delete();
+    
+        return redirect()->route('subjenis.index')->with('success', 'Sub Jenis berhasil dihapus');
     }
 }

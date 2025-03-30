@@ -10,13 +10,15 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    Schema::create('sub_jenis', function (Blueprint $table) {
-        $table->id();
-        $table->string('nama');
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('sub_jenis', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('jenis_materiil_id')->constrained('jenis_materiil')->onDelete('cascade');
+            $table->string('nama');
+            $table->timestamps();
+        });
+    }
+    
 
 
     /**

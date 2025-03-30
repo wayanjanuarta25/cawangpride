@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubSubJenis extends Model
+class JenisMateriil extends Model
 {
     use HasFactory;
 
-    protected $table = 'sub_sub_jenis';
-    protected $fillable = ['sub_jenis_id', 'nama'];
+    protected $table = 'jenis_materiil';
+    protected $fillable = ['nama'];
 
     public function subJenis()
     {
-        return $this->belongsTo(SubJenis::class);
+        return $this->hasMany(SubJenis::class);
     }
 }
+

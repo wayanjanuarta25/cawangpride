@@ -9,7 +9,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\SubJenisController;
 use App\Http\Controllers\SubSubJenisController;
-
+use App\Http\Controllers\JenisMateriilController;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\BarangKeluarController;
+use App\Http\Controllers\StokBarangController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,13 +49,34 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/manage-users', [SuperadminController::class, 'manageUsers'])->name('manage.users');
     Route::get('/data-master', [SuperadminController::class, 'dataMaster'])->name('data.master');
     
+    // Manajemen Barang
+    Route::resource('barang', BarangController::class);
+    Route::get('/barang/{barang}', [BarangController::class, 'show'])->name('barang.show');
+
+
+    // Transaksi
+    Route::resource('barang_masuk', BarangMasukController::class);
+    Route::resource('barang_keluar', BarangKeluarController::class);
+
+
+
     // Data Master
     Route::resource('gudang', GudangController::class);
-    Route::resource('sub-jenis', SubJenisController::class);
-    Route::resource('sub-sub-jenis', SubSubJenisController::class);
+    Route::resource('subjenis', SubJenisController::class);
+    Route::resource('subsubjenis', SubSubJenisController::class);
+    Route::resource('jenismateriil', JenisMateriilController::class);
+    Route::resource('status', StatusController::class);
+
+    Route::get('/subsubjenis/getBySubJenis', [SubSubJenisController::class, 'getBySubJenis'])->name('subsubjenis.getBySubJenis');
+    Route::get('/get-sub-jenis/{jenis_materiil_id}', [BarangController::class, 'getSubJenis']);
+    Route::get('/get-sub-sub-jenis/{sub_jenis_id}', [BarangController::class, 'getSubSubJenis']);
+
 
     // Manajemen User
     Route::resource('/users', UserController::class);
+
+    // Stok Barang
+    Route::get('/stok_barang', [StokBarangController::class, 'index'])->name('stok_barang.index');
 });
 
 // **Admin Routes**

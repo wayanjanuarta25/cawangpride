@@ -2,63 +2,81 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SubSubJenis;
+use App\Models\SubJenis;
 use Illuminate\Http\Request;
 
 class SubSubJenisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $subSubJenis = SubSubJenis::with('subJenis.jenisMateriil')->paginate(10);
+        return view('data_master.subsubjenis.index', compact('subSubJenis'));
     }
+    
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create() 
     {
-        //
+        $subJenis = SubJenis::with('jenisMateriil')->get();
+        return view('data_master.subsubjenis.create', compact('subJenis'));
     }
+    
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'sub_jenis_id' => 'required|exists:sub_jenis,id',
+            'nama' => 'required|string|max:255',
+        ]);
+
+        SubSubJenis::create([
+            'sub_jenis_id' => $request->sub_jenis_id,
+            'nama' => $request->nama,
+        ]);
+
+        return redirect()->route('subsubjenis.index')->with('success', 'Sub Sub Jenis berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $subSubJenis = SubSubJenis::findOrFail($id);
+        $subJenis = SubJenis::all(); // Ambil semua sub_jenis agar bisa dipilih saat edit
+        return view('data_master.subsubjenis.edit', compact('subSubJenis', 'subJenis'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'sub_jenis_id' => 'required|exists:sub_jenis,id',
+            'nama' => 'required|string|max:255',
+        ]);
+
+        $subSubJenis = SubSubJenis::findOrFail($id);
+        $subSubJenis->update([
+            'sub_jenis_id' => $request->sub_jenis_id,
+            'nama' => $request->nama,
+        ]);
+
+        return redirect()->route('subsubjenis.index')->with('success', 'Sub Sub Jenis berhasil diperbarui');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
+        $subSubJenis = SubSubJenis::findOrFail($id);
+        
+        // Cek apakah data masih digunakan sebelum menghapus
+        if ($subSubJenis->barang()->exists()) {
+            return redirect()->route('subsubjenis.index')->with('error', 'Sub Sub Jenis tidak bisa dihapus karena masih digunakan.');
+        }
+
+        $subSubJenis->delete();
+
+        return redirect()->route('subsubjenis.index')->with('success', 'Sub Sub Jenis berhasil dihapus');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function getBySubJenis(Request $request)
     {
-        //
+        $subSubJenis = SubSubJenis::where('sub_jenis_id', $request->sub_jenis_id)->get();
+        return response()->json($subSubJenis);
     }
 }
