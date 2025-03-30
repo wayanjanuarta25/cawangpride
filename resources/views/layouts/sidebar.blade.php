@@ -168,6 +168,15 @@
                     </ul>
                 </li>
 
+                @if (auth()->user()->hasRole('superadmin'))
+                    <li class="nav-item">
+                        <a href="{{ route('login.history') }}" class="nav-link">
+                            <i class="nav-icon fas fa-history"></i>
+                            <p>Riwayat Login</p>
+                        </a>
+                    </li>
+                @endif
+
                 <!-- Logout -->
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link"

@@ -16,6 +16,7 @@ use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\StokBarangController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LoginHistoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Superadmin Routes
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
+    Route::get('/login-history', [LoginHistoryController::class, 'index'])->name('login.history');
     Route::get('/dashboard/superadmin', [SuperadminController::class, 'index'])->name('dashboard.superadmin');
     Route::resource('users', UserController::class);
     Route::resource('barang', BarangController::class);

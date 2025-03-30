@@ -9,8 +9,15 @@ class LoginHistory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'ip_address', 'user_agent', 'login_at'];
-    
-    public $timestamps = false; 
-}
+    protected $fillable = [
+        'user_id',
+        'ip_address',
+        'user_agent',
+        'login_at',
+    ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+}
