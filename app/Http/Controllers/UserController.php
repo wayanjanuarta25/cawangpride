@@ -11,8 +11,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $users = User::with('roles')->get(); 
+    return view('users.index', compact('users'));
     }
 
     public function create()
@@ -27,19 +27,21 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
-            'role' => 'required'
+            'role' => 'required|exists:roles,name'
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
         ]);
-
+    
         $user->assignRole($request->role);
 
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan');
+        // dd($request->all());
     }
+
 
     public function edit(User $user)
     {

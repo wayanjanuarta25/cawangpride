@@ -116,7 +116,7 @@
                 </li>
 
                 <!-- Manajemen User (Superadmin Only) -->
-                @if (auth()->user()->role == 'superadmin')
+                @if (auth()->user()->hasRole('superadmin'))
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
@@ -141,6 +141,7 @@
                         </ul>
                     </li>
                 @endif
+
 
                 <!-- Laporan -->
                 <li class="nav-item has-treeview">
@@ -169,7 +170,8 @@
 
                 <!-- Logout -->
                 <li class="nav-item">
-                    <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>Logout</p>
                     </a>
@@ -181,4 +183,3 @@
         </nav>
     </div>
 </aside>
-

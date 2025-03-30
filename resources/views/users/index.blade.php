@@ -25,7 +25,7 @@
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->role}}</td>
+                        <td>{{ $user->getRoleNames()->implode(', ') }}</td>
                         <td>
                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">

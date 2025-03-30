@@ -15,27 +15,32 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\StokBarangController;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Redirect otomatis setelah login sesuai role
+// Redirect setelah login
 Route::middleware(['auth'])->get('/redirect', function () {
     $user = Auth::user();
 
-    return match ($user->role) {
-        'superadmin' => redirect()->route('dashboard.superadmin'),
-        'admin'      => redirect()->route('dashboard.admin'),
-        default      => redirect()->route('dashboard'),
-    };
+    if ($user->hasRole('superadmin')) {
+        return redirect()->route('dashboard.superadmin');
+    } elseif ($user->hasRole('admin')) {
+        return redirect()->route('dashboard.admin');
+    }
+
+    return redirect()->route('dashboard');
 });
 
 // Dashboard utama
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', fn() => redirect('/redirect'))->name('dashboard');
+Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
+    return redirect('/redirect');
+})->name('dashboard');
 
-    // Profile Routes
+// Profile Routes
+Route::middleware(['auth'])->group(function () {
     Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'edit')->name('profile.edit');
         Route::patch('/profile', 'update')->name('profile.update');
@@ -43,51 +48,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-// **Superadmin Routes**
+// Superadmin Routes
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/dashboard/superadmin', [SuperadminController::class, 'index'])->name('dashboard.superadmin');
-    Route::get('/manage-users', [SuperadminController::class, 'manageUsers'])->name('manage.users');
-    Route::get('/data-master', [SuperadminController::class, 'dataMaster'])->name('data.master');
-    
-    // Manajemen Barang
+    Route::resource('users', UserController::class);
     Route::resource('barang', BarangController::class);
-    Route::get('/barang/{barang}', [BarangController::class, 'show'])->name('barang.show');
-
-
-    // Transaksi
     Route::resource('barang_masuk', BarangMasukController::class);
     Route::resource('barang_keluar', BarangKeluarController::class);
-
-
-
-    // Data Master
     Route::resource('gudang', GudangController::class);
     Route::resource('subjenis', SubJenisController::class);
     Route::resource('subsubjenis', SubSubJenisController::class);
     Route::resource('jenismateriil', JenisMateriilController::class);
     Route::resource('status', StatusController::class);
-
-    Route::get('/subsubjenis/getBySubJenis', [SubSubJenisController::class, 'getBySubJenis'])->name('subsubjenis.getBySubJenis');
-    Route::get('/get-sub-jenis/{jenis_materiil_id}', [BarangController::class, 'getSubJenis']);
-    Route::get('/get-sub-sub-jenis/{sub_jenis_id}', [BarangController::class, 'getSubSubJenis']);
-
-
-    // Manajemen User
-    Route::resource('/users', UserController::class);
-
-    // Stok Barang
     Route::get('/stok_barang', [StokBarangController::class, 'index'])->name('stok_barang.index');
 });
 
-// **Admin Routes**
+// Admin Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
+    Route::resource('barang_masuk', BarangMasukController::class)->only(['index', 'show']);
+    Route::resource('barang_keluar', BarangKeluarController::class)->only(['index', 'show']);
 });
 
-// Logout Route
-Route::post('/logout', function () {
-    Auth::logout();
-    return redirect('/');
-})->name('logout');
+// Logout
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 require __DIR__.'/auth.php';

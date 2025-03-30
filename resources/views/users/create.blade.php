@@ -31,7 +31,7 @@
                     @foreach ($roles as $role)
                         <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
                     @endforeach
-                </select>
+                </select>                                
             </div>
 
             <button type="submit" class="btn btn-success">Simpan</button>
