@@ -1,5 +1,7 @@
 <?php
-
+use App\Models\SubJenis;
+use App\Models\SubSubJenis;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\StokBarangController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LoginHistoryController;
+use App\Http\Controllers\LaporanBarangController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -63,13 +66,22 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::resource('jenismateriil', JenisMateriilController::class);
     Route::resource('status', StatusController::class);
     Route::get('/stok_barang', [StokBarangController::class, 'index'])->name('stok_barang.index');
+    Route::get('/laporan/barang-masuk', [LaporanBarangController::class, 'index'])->name('laporan.barang_masuk');
+    Route::get('/laporan/barang-masuk/pdf', [LaporanBarangController::class, 'exportPDF'])->name('laporan.barang_masuk.pdf');
+    Route::get('/get-sub-jenis/{jenis_materiil_id}', function ($jenis_materiil_id) {
+        return response()->json(SubJenis::where('jenis_materiil_id', $jenis_materiil_id)->get());
+    });
+    
+    Route::get('/get-sub-sub-jenis/{sub_jenis_id}', function ($sub_jenis_id) {
+        return response()->json(SubSubJenis::where('sub_jenis_id', $sub_jenis_id)->get());
+    });
 });
 
 // Admin Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
-    Route::resource('barang_masuk', BarangMasukController::class)->only(['index', 'show']);
-    Route::resource('barang_keluar', BarangKeluarController::class)->only(['index', 'show']);
+    // Route::resource('barang_masuk', BarangMasukController::class)->only(['index', 'show']);
+    // Route::resource('barang_keluar', BarangKeluarController::class)->only(['index', 'show']);
 });
 
 // Logout

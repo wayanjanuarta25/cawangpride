@@ -14,7 +14,7 @@ class SubJenis extends Model
 
     public function jenisMateriil()
     {
-        return $this->belongsTo(JenisMateriil::class);
+        return $this->belongsTo(JenisMateriil::class, 'jenis_materiil_id');
     }
 
     public function subSubJenis()

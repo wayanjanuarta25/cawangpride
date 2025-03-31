@@ -14,6 +14,6 @@ class SubSubJenis extends Model
 
     public function subJenis()
     {
-        return $this->belongsTo(SubJenis::class);
+        return $this->belongsTo(SubJenis::class, 'sub_jenis_id');
     }
 }

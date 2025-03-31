@@ -8,6 +8,7 @@
     <div class="sidebar">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                
                 <!-- Dashboard -->
                 <li class="nav-item">
                     <a href="{{ route('dashboard.superadmin') }}" class="nav-link">
@@ -142,7 +143,6 @@
                     </li>
                 @endif
 
-
                 <!-- Laporan -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -154,13 +154,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('laporan.barang_masuk') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan Barang Masuk</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan Barang Keluar</p>
                             </a>
@@ -168,6 +168,7 @@
                     </ul>
                 </li>
 
+                <!-- Riwayat Login (Superadmin Only) -->
                 @if (auth()->user()->hasRole('superadmin'))
                     <li class="nav-item">
                         <a href="{{ route('login.history') }}" class="nav-link">
@@ -188,6 +189,7 @@
                         @csrf
                     </form>
                 </li>
+
             </ul>
         </nav>
     </div>
