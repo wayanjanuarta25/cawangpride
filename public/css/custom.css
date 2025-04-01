@@ -1,0 +1,15 @@
+.action-icons {
+    display: flex;
+    gap: 5px; 
+    justify-content: center;
+    border-bottom: none !important;
+}
+
+.action-icons .btn {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}

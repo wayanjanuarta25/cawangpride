@@ -36,16 +36,21 @@
                     <td>{{ $item->no_seri }}</td>
                     <td>{{ $item->produk }}</td>
                     <td>{{ $item->kondisi }}</td>
-                    <td>
-                        <a href="{{ route('barang.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
-                        <a href="{{ route('barang.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <td class="action-icons">
+                        <a href="{{ route('barang.show', $item->id) }}" class="btn btn-sm btn-info">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="{{ route('barang.edit', $item->id) }}" class="btn btn-sm btn-warning">
+                            <i class="fas fa-edit"></i>
+                        </a>
                         <form action="{{ route('barang.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus barang ini?')">Hapus</button>
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus barang ini?')">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </form>
-                    </td>
-                    
+                    </td>                                     
                 </tr>
             @endforeach
         </tbody>

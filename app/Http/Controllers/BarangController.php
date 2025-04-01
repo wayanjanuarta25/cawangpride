@@ -49,11 +49,16 @@ class BarangController extends Controller
             'posisi_id' => 'required|exists:gudangs,id',
             'status_id' => 'required|exists:status,id',
         ]);
-
+    
         Barang::create($request->all());
-
-        return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan');
+    
+        if ($request->save_type == 'back') {
+            return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan');
+        }
+    
+        return back()->with('success', 'Barang berhasil ditambahkan');
     }
+
 
     public function edit(Barang $barang)
     {
