@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mt-4">
         <!-- Ringkasan Data -->
         <div class="col-lg-3 col-6">
             <div class="small-box bg-info">
