@@ -5,8 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
     
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>INVENTECH</title>
     
+        <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.png') }}">
+
         <!-- AdminLTE CSS -->
         <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
         <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">

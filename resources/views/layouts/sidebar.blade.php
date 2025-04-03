@@ -1,8 +1,14 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ url('/') }}" class="brand-link">
+    {{-- <a href="{{ url('/') }}" class="brand-link">
+        <span class="brand-text font-weight-light">INVENTECH</span>
+    </a> --}}
+
+    <a href="{{ route('dashboard') }}" class="brand-link">
+        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">INVENTECH</span>
     </a>
+    
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -31,12 +37,6 @@
                             <a href="{{ route('barang.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Barang</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('barang.create') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tambah Barang</p>
                             </a>
                         </li>
                         <li class="nav-item">
