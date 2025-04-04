@@ -54,7 +54,6 @@ Route::middleware(['auth'])->group(function () {
 
 // Superadmin Routes
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
-    Route::get('/login-history', [LoginHistoryController::class, 'index'])->name('login.history');
     Route::get('/dashboard/superadmin', [SuperadminController::class, 'index'])->name('dashboard.superadmin');
     Route::resource('users', UserController::class);
     Route::resource('barang', BarangController::class);
@@ -75,6 +74,10 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/get-sub-sub-jenis/{sub_jenis_id}', function ($sub_jenis_id) {
         return response()->json(SubSubJenis::where('sub_jenis_id', $sub_jenis_id)->get());
     });
+
+    Route::get('/login-history', [LoginHistoryController::class, 'index'])->name('login.history');
+    Route::delete('/login-history/{id}', [LoginHistoryController::class, 'destroy'])->name('login_history.destroy');
+    Route::delete('/login-history', [LoginHistoryController::class, 'clear'])->name('login_history.clear');
 });
 
 // Admin Routes

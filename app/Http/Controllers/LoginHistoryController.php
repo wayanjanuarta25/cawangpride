@@ -13,4 +13,20 @@ class LoginHistoryController extends Controller
         
         return view('login_history.index', compact('histories'));
     }
+
+    public function destroy($id)
+    {
+        $history = LoginHistory::findOrFail($id);
+        $history->delete();
+
+        return redirect()->route('login.history')->with('success', 'Riwayat login berhasil dihapus.');
+    }
+
+    public function clear()
+    {
+        LoginHistory::truncate();
+    
+        return redirect()->route('login.history')->with('success', 'Semua riwayat login berhasil dihapus.');
+    }
+
 }
