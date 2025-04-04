@@ -5,9 +5,10 @@
     <!-- Title and Breadcrumb -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Manajemen Barang</h1>
-        <div>
-            <span>Dashboard > Stock Barang</span>
-        </div>
+        <nav>
+            <a href="{{ route('dashboard') }}">Dashboard</a> > 
+            <a href="{{ route('barang.index') }}" class="text-decoration-none fw-bold">Stock Barang</a>
+        </nav>
     </div>
 
     @if (session('success'))
@@ -16,11 +17,13 @@
 
     <!-- Card with Table and Button -->
     <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header d-flex justify-content-between align-items-right">
             <h5>Daftar Barang</h5>
-            <a href="{{ route('barang.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Tambah Barang
-            </a>
+            <div class="text-end">
+                <a href="{{ route('barang.create') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tambah Barang
+                </a>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-bordered">

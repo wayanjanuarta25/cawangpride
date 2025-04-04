@@ -62,6 +62,7 @@ class BarangController extends Controller
 
     public function edit(Barang $barang)
     {
+        // dd($barang);
         $jenisMateriil = JenisMateriil::all();
         $subJenis = SubJenis::all();
         $subSubJenis = SubSubJenis::all();
