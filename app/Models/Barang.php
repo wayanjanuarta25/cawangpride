@@ -18,29 +18,30 @@ class Barang extends Model
         'posisi_id', 'status_id'
     ];
 
-    // Relasi ke Jenis Materiil
     public function jenisMateriil() {
         return $this->belongsTo(JenisMateriil::class);
     }
 
-    // Relasi ke Sub Jenis
     public function subJenis() {
         return $this->belongsTo(SubJenis::class);
     }
 
-    // Relasi ke Sub Sub Jenis
     public function subSubJenis() {
         return $this->belongsTo(SubSubJenis::class);
     }
 
-    // Relasi ke Gudang (Posisi)
     public function gudang()
     {
         return $this->belongsTo(Gudang::class, 'posisi_id'); 
     }   
 
-    // Relasi ke Status
     public function status() {
         return $this->belongsTo(Status::class);
     }
+
+    public function barangMasuk()
+    {
+        return $this->hasMany(BarangMasuk::class, 'barang_id');
+    }
+
 }

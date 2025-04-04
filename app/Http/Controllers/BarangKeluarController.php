@@ -16,7 +16,10 @@ class BarangKeluarController extends Controller
 
     public function create()
     {
-        $barang = Barang::all();
+        $barang = Barang::whereIn('id', function ($query) {
+            $query->select('barang_id')->from('barang_masuks');
+        })->get();
+
         return view('barang_keluar.create', compact('barang'));
     }
 
