@@ -21,7 +21,7 @@
             @foreach ($barangMasuk as $key => $barang)
                 <tr>
                     <td>{{ $key + 1 }}</td>
-                    <td>{{ $barang->nama_barang }}</td>
+                    <td>{{ $barang->barang->merk }} ({{ $barang->barang->tipe }})</td>
                     <td>{{ $barang->jumlah }}</td>
                     <td>{{ $barang->satuan }}</td>
                     <td>{{ $barang->kondisi }}</td>

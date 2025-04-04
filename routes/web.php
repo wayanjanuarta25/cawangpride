@@ -43,6 +43,13 @@ Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return redirect('/redirect');
 })->name('dashboard');
 
+// Dashboard Superadmin
+Route::middleware(['auth', 'role:superadmin'])->get('/dashboard/superadmin', [SuperadminController::class, 'index'])->name('dashboard.superadmin');
+
+// Dashboard Admin
+Route::middleware(['auth', 'role:admin'])->get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
+
+
 // Profile Routes
 Route::middleware(['auth'])->group(function () {
     Route::controller(ProfileController::class)->group(function () {
@@ -52,10 +59,8 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-// Superadmin Routes
-Route::middleware(['auth', 'role:superadmin'])->group(function () {
-    Route::get('/dashboard/superadmin', [SuperadminController::class, 'index'])->name('dashboard.superadmin');
-    Route::resource('users', UserController::class);
+// Superadmin & Admin Routes (Kecuali Manajemen User)
+Route::middleware(['auth', 'role:superadmin|admin'])->group(function () {
     Route::resource('barang', BarangController::class);
     Route::resource('barang_masuk', BarangMasukController::class);
     Route::resource('barang_keluar', BarangKeluarController::class);
@@ -67,10 +72,11 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/stok_barang', [StokBarangController::class, 'index'])->name('stok_barang.index');
     Route::get('/laporan/barang-masuk', [LaporanBarangController::class, 'index'])->name('laporan.barang_masuk');
     Route::get('/laporan/barang-masuk/pdf', [LaporanBarangController::class, 'exportPDF'])->name('laporan.barang_masuk.pdf');
+    
     Route::get('/get-sub-jenis/{jenis_materiil_id}', function ($jenis_materiil_id) {
         return response()->json(SubJenis::where('jenis_materiil_id', $jenis_materiil_id)->get());
     });
-    
+
     Route::get('/get-sub-sub-jenis/{sub_jenis_id}', function ($sub_jenis_id) {
         return response()->json(SubSubJenis::where('sub_jenis_id', $sub_jenis_id)->get());
     });
@@ -80,11 +86,9 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::delete('/login-history', [LoginHistoryController::class, 'clear'])->name('login_history.clear');
 });
 
-// Admin Routes
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('dashboard.admin');
-    // Route::resource('barang_masuk', BarangMasukController::class)->only(['index', 'show']);
-    // Route::resource('barang_keluar', BarangKeluarController::class)->only(['index', 'show']);
+// Manajemen User Hanya untuk Superadmin
+Route::middleware(['auth', 'role:superadmin'])->group(function () {
+    Route::resource('users', UserController::class);
 });
 
 // Logout
