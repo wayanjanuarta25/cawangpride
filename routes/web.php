@@ -69,9 +69,15 @@ Route::middleware(['auth', 'role:superadmin|admin'])->group(function () {
     Route::resource('subsubjenis', SubSubJenisController::class);
     Route::resource('jenismateriil', JenisMateriilController::class);
     Route::resource('status', StatusController::class);
+    
     Route::get('/stok_barang', [StokBarangController::class, 'index'])->name('stok_barang.index');
-    Route::get('/laporan/barang-masuk', [LaporanBarangController::class, 'index'])->name('laporan.barang_masuk');
-    Route::get('/laporan/barang-masuk/pdf', [LaporanBarangController::class, 'exportPDF'])->name('laporan.barang_masuk.pdf');
+    
+    Route::get('/laporan/barang-masuk', [LaporanBarangController::class, 'barangMasuk'])->name('laporan.barang_masuk');
+    Route::get('/laporan/barang-masuk/pdf', [LaporanBarangController::class, 'barangMasukPDF'])->name('laporan.barang_masuk.pdf');
+    
+    Route::get('/laporan/barang-keluar', [LaporanBarangController::class, 'barangKeluar'])->name('laporan.barang_keluar');
+    Route::get('/laporan/barang-keluar/pdf', [LaporanBarangController::class, 'barangKeluarPDF'])->name('laporan.barang_keluar.pdf');
+    
     
     Route::get('/get-sub-jenis/{jenis_materiil_id}', function ($jenis_materiil_id) {
         return response()->json(SubJenis::where('jenis_materiil_id', $jenis_materiil_id)->get());
