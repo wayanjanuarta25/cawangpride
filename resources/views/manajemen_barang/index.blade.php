@@ -17,16 +17,20 @@
 
     <!-- Card with Table and Button -->
     <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-right">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <h5>Daftar Barang</h5>
             <div class="text-end">
-                <a href="{{ route('barang.create') }}" class="btn btn-primary">
+                <a href="{{ route('barang.create') }}" class="btn btn-primary mb-2">
                     <i class="fas fa-plus"></i> Tambah Barang
                 </a>
-            </div>
+                <a href="{{ route('barang.exportAllPDF') }}" class="btn btn-success mb-2">
+                    <i class="fas fa-file-pdf"></i> Download Semua Barang
+                </a>
+            </div>            
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
+            <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -54,6 +58,9 @@
                             <td>{{ $item->produk }}</td>
                             <td>{{ $item->kondisi }}</td>
                             <td class="action-icons">
+                                <a href="{{ route('barang.exportItemPDF', $item->id) }}" class="btn btn-sm btn-secondary">
+                                    <i class="fas fa-file-pdf"></i>
+                                </a>                                
                                 <a href="{{ route('barang.show', $item->id) }}" class="btn btn-sm btn-info">
                                     <i class="fas fa-eye"></i>
                                 </a>
@@ -72,6 +79,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 </div>

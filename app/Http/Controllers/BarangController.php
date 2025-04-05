@@ -9,6 +9,7 @@ use App\Models\SubSubJenis;
 use App\Models\Gudang;
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BarangController extends Controller
 {
@@ -100,9 +101,23 @@ class BarangController extends Controller
         return response()->json($subJenis);
     }
 
-public function getSubSubJenis($sub_jenis_id)
+    public function getSubSubJenis($sub_jenis_id)
     {
         $subSubJenis = SubSubJenis::where('sub_jenis_id', $sub_jenis_id)->get();
         return response()->json($subSubJenis);
+    }
+
+    public function exportAllPDF()
+    {
+        $barang = Barang::with(['jenisMateriil', 'subJenis', 'subSubJenis'])->get();
+        $pdf = Pdf::loadView('manajemen_barang.export_all', compact('barang'));
+        return $pdf->download('semua_barang.pdf');
+    }
+    
+    public function exportItemPDF($id)
+    {
+        $barang = Barang::with(['jenisMateriil', 'subJenis', 'subSubJenis'])->findOrFail($id);
+        $pdf = Pdf::loadView('manajemen_barang.export_item', compact('barang'));
+        return $pdf->download('barang_' . $barang->id . '.pdf');
     }
 }
