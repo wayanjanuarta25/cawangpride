@@ -20,7 +20,15 @@
                 <table class="table table-bordered table-striped">
                     <tbody>
                         <tr>
-                            <th width="30%">Jenis Materiil</th>
+                            <th width="30%">Foto Materiil</th>
+                            <td>
+                                @if($barang->foto)
+                                    <img src="{{ asset('uploads/barang/' . $barang->foto) }}" alt="Foto Barang" class="img-fluid" style="max-height: 300px;">
+                                @endif
+                        </td>
+                        </tr>
+                        <tr>
+                            <th>Jenis Materiil</th>
                             <td>{{ $barang->jenisMateriil->nama ?? '-' }}</td>
                         </tr>
                         <tr>

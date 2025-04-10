@@ -49,9 +49,19 @@ class BarangController extends Controller
             'kondisi' => 'required',
             'posisi_id' => 'required|exists:gudangs,id',
             'status_id' => 'required|exists:status,id',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
     
-        Barang::create($request->all());
+        $data = $request->all();
+        
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/barang'), $filename);
+            $data['foto'] = $filename;
+        }
+    
+        Barang::create($data);
     
         if ($request->save_type == 'back') {
             return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan');

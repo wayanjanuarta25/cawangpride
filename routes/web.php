@@ -61,6 +61,9 @@ Route::middleware(['auth'])->group(function () {
 
 // Superadmin & Admin Routes (Kecuali Manajemen User)
 Route::middleware(['auth', 'role:superadmin|admin'])->group(function () {
+    
+    Route::get('/barang/export-all-pdf', [BarangController::class, 'exportAllPDF'])->name('barang.exportAllPDF');
+    
     Route::resource('barang', BarangController::class);
     Route::resource('barang_masuk', BarangMasukController::class);
     Route::resource('barang_keluar', BarangKeluarController::class);
@@ -72,11 +75,8 @@ Route::middleware(['auth', 'role:superadmin|admin'])->group(function () {
     
     Route::get('/stok_barang', [StokBarangController::class, 'index'])->name('stok_barang.index');
     
-    // Route::get('/manajemen-barang/export-all-pdf', [BarangController::class, 'exportAllPDF'])->name('barang.exportAllPDF');
-    Route::get('/barang/export-all-pdf', [BarangController::class, 'exportAllPDF'])->name('barang.exportAllPDF');
     Route::get('/barang/{id}/export-pdf', [BarangController::class, 'exportItemPDF'])->name('barang.exportItemPDF');
 
-    
     Route::get('/laporan/barang-masuk', [LaporanBarangController::class, 'barangMasuk'])->name('laporan.barang_masuk');
     Route::get('/laporan/barang-masuk/pdf', [LaporanBarangController::class, 'barangMasukPDF'])->name('laporan.barang_masuk.pdf');
     

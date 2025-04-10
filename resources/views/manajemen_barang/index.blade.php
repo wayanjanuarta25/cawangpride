@@ -4,10 +4,10 @@
 <div class="container">
     <!-- Title and Breadcrumb -->
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1>Manajemen Barang</h1>
+        <h1>Manajemen Materiil</h1>
         <nav>
             <a href="{{ route('dashboard') }}">Dashboard</a> > 
-            <a href="{{ route('barang.index') }}" class="text-decoration-none fw-bold">Stock Barang</a>
+            <a href="{{ route('barang.index') }}" class="text-decoration-none fw-bold">Stock Materiil</a>
         </nav>
     </div>
 
@@ -18,13 +18,13 @@
     <!-- Card with Table and Button -->
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5>Daftar Barang</h5>
+            <h5>Daftar Materiil</h5>
             <div class="text-end">
                 <a href="{{ route('barang.create') }}" class="btn btn-primary mb-2">
-                    <i class="fas fa-plus"></i> Tambah Barang
+                    <i class="fas fa-plus"></i> Tambah Materiil
                 </a>
                 <a href="{{ route('barang.exportAllPDF') }}" class="btn btn-success mb-2">
-                    <i class="fas fa-file-pdf"></i> Download Semua Barang
+                    <i class="fas fa-file-pdf"></i> Download Semua Materiil
                 </a>
             </div>            
         </div>

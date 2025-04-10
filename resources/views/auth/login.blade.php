@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="flex justify-center mb-6">
-        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" style="max-width: 25%">
+        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" style="max-width: 45%">
     </div>
 
     <!-- Session Status -->

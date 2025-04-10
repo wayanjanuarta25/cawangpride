@@ -28,7 +28,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
-                            Manajemen Barang
+                            Manajemen Materiil
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -36,13 +36,13 @@
                         <li class="nav-item">
                             <a href="{{ route('barang.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>List Barang</p>
+                                <p>List Materiil</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('stok_barang.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Stok Barang</p>
+                                <p>Stok Materiil</p>
                             </a>
                         </li>
                     </ul>

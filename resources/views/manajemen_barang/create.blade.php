@@ -6,10 +6,10 @@
         <div class="col-md-10 mt-4">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Tambah Barang</h4>
+                    <h4 class="mb-0">Tambah Materiil</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('barang.store') }}" method="POST">
+                    <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
@@ -132,6 +132,12 @@
                                             <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Foto Materiil</label>
+                                        <input type="file" name="foto" id="foto" class="form-control">
                                 </div>
                             </div>
                         </div>
