@@ -15,7 +15,7 @@ class Barang extends Model
         'jenis_materiil_id', 'sub_jenis_id', 'sub_sub_jenis_id', 
         'merk', 'tipe', 'no_seri', 'produk', 'tahun_produksi', 
         'tahun_pengadaan', 'tahun_pakai', 'masa_pakai', 'kondisi', 
-        'posisi_id', 'status_id'
+        'posisi_id', 'status_id','foto'
     ];
 
     public function jenisMateriil() {
