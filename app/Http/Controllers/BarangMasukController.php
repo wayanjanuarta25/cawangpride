@@ -33,7 +33,11 @@ class BarangMasukController extends Controller
 
         BarangMasuk::create($request->all());
 
-        return redirect()->route('barang_masuk.index')->with('success', 'Barang masuk berhasil ditambahkan.');
+        if ($request->save_type == 'back') {
+            return redirect()->route('barang_masuk.index')->with('success', 'Data berhasil ditambahkan');
+        }
+    
+        return back()->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit(BarangMasuk $barangMasuk)

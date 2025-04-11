@@ -25,6 +25,7 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="jumlah" class="form-label">Jumlah</label>
@@ -35,6 +36,7 @@
                         <label for="satuan" class="form-label">Satuan</label>
                         <input type="text" name="satuan" id="satuan" class="form-control" placeholder="Masukkan Satuan Materiil Masuk" required>
                     </div>
+
                     <div class="col-md-6 mb-3">
                         <label for="kondisi" class="form-label">Kondisi</label>
                         <select name="kondisi" id="kondisi" class="form-control" required>
@@ -57,10 +59,15 @@
                 </div>
 
                 <div class="text-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" name="save_type" value="stay" class="btn btn-primary me-2">
                         <i class="fas fa-save"></i> Simpan
                     </button>
-                </div>
+                
+                    <button type="submit" name="save_type" value="back" class="btn btn-success">
+                        <i class="fas fa-save"></i> Simpan & Kembali
+                    </button>
+                </div>                          
+
             </form>
         </div>
     </div>
