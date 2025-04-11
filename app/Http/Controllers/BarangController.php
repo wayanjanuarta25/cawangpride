@@ -53,14 +53,14 @@ class BarangController extends Controller
         ]);
     
         $data = $request->all();
-        
+
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('uploads/barang'), $filename);
             $data['foto'] = $filename;
         }
-    
+
         Barang::create($data);
     
         if ($request->save_type == 'back') {
@@ -92,16 +92,45 @@ class BarangController extends Controller
             'tahun_produksi' => 'required|integer',
             'tahun_pengadaan' => 'required|integer',
             'kondisi' => 'required',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
-        $barang->update($request->all());
-
+    
+        $data = $request->all();
+    
+        if ($request->hasFile('foto')) {
+            if ($barang->foto) {
+                $fotoLama = public_path('uploads/barang/' . $barang->foto);
+                if (file_exists($fotoLama)) {
+                    unlink($fotoLama);
+                }
+            }
+        
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/barang'), $filename);
+        
+            $data['foto'] = $filename;
+        } else {
+            unset($data['foto']);
+        }
+    
+        $barang->update($data);
+    
         return redirect()->route('barang.index')->with('success', 'Barang berhasil diperbarui');
     }
 
     public function destroy(Barang $barang)
     {
+        if ($barang->foto) {
+            $fotoPath = public_path('uploads/barang/' . $barang->foto);
+        
+            if (file_exists($fotoPath)) {
+                unlink($fotoPath);
+            }
+        }
+    
         $barang->delete();
+
         return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus');
     }
 
