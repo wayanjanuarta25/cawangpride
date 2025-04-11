@@ -2,15 +2,19 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit Barang Masuk</h1>
-    <a href="{{ route('barang_masuk.index') }}" class="btn btn-secondary mb-3">Kembali</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Edit Materiil Masuk</h1>
+        <a href="{{ route('barang_masuk.index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </a>
+    </div>
 
     <form action="{{ route('barang_masuk.update', $barangMasuk->id) }}" method="POST">
         @csrf
         @method('PUT')
 
         <div class="form-group">
-            <label>Nama Barang</label>
+            <label>Nama Materiil</label>
             <select name="barang_id" class="form-control" required>
                 <option value="">Pilih Barang</option>
                 @foreach ($barang as $item)

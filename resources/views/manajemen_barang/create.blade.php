@@ -2,11 +2,19 @@
 
 @section('content')
 <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Tambah Materiil</h1>
+        <nav>
+            <a href="{{ route('dashboard') }}">Dashboard</a> > 
+            <a href="{{ route('barang.index') }}" class="text-decoration-none fw-bold">List Materiil</a> >
+            <span>Tambah Materiil</span>
+        </nav>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-10 mt-4">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Tambah Materiil</h4>
+                    <h4 class="mb-0">Materiil</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
@@ -46,7 +54,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Merk</label>
-                                    <input type="text" name="merk" class="form-control" required>
+                                    <input type="text" name="merk" class="form-control" placeholder="Masukkan Merk" required>
                                 </div>
                             </div>
                         </div>
@@ -55,13 +63,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tipe</label>
-                                    <input type="text" name="tipe" class="form-control" required>
+                                    <input type="text" name="tipe" class="form-control" placeholder="Masukkan Tipe" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>No Seri</label>
-                                    <input type="text" name="no_seri" class="form-control" required>
+                                    <input type="text" name="no_seri" class="form-control" placeholder="Masukkan No Seri" required>
                                 </div>
                             </div>
                         </div>
@@ -70,13 +78,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Produk (Negara)</label>
-                                    <input type="text" name="produk" class="form-control" required>
+                                    <input type="text" name="produk" class="form-control" placeholder="Masukkan Asal Produk" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tahun Produksi</label>
-                                    <input type="number" name="tahun_produksi" class="form-control" required>
+                                    <input type="number" name="tahun_produksi" class="form-control" placeholder="Masukkan Tahun Produksi" required>
                                 </div>
                             </div>
                         </div>
@@ -85,13 +93,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tahun Pengadaan</label>
-                                    <input type="number" name="tahun_pengadaan" class="form-control" required>
+                                    <input type="number" name="tahun_pengadaan" class="form-control" placeholder="Masukkan Tahun Pengadaan" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tahun Pakai</label>
-                                    <input type="number" name="tahun_pakai" class="form-control" required>
+                                    <input type="number" name="tahun_pakai" class="form-control" placeholder="Masukkan Tahun Pakai" required>
                                 </div>
                             </div>
                         </div>
@@ -100,13 +108,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Masa Pakai</label>
-                                    <input type="text" name="masa_pakai" class="form-control" required>
+                                    <input type="text" name="masa_pakai" class="form-control" placeholder="Masukkan Masa Pakai (Tahun)" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Kondisi</label>
-                                    <input type="text" name="kondisi" class="form-control" required>
+                                    <input type="text" name="kondisi" class="form-control" placeholder="Masukkan Kondisi Materiil" required>
                                 </div>
                             </div>
                         </div>

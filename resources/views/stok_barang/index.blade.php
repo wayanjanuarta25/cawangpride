@@ -2,8 +2,13 @@
 
 @section('content')
 <div class="container">
-    <h1>Stok Barang</h1>
-    <a href="{{ route('barang.index') }}" class="btn btn-secondary mb-3">Kembali</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Stock Materiil</h1>
+        <nav>
+            <a href="{{ route('dashboard') }}">Dashboard</a> > 
+            <span>Stock Materiil</span>
+        </nav>
+    </div>
 
     <table class="table table-bordered">
         <thead>

@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-    <!-- Title and Back Button -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Detail Barang</h1>
         <a href="{{ route('barang.index') }}" class="btn btn-secondary">
@@ -10,7 +9,6 @@
         </a>
     </div>
 
-    <!-- Card for Detail -->
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0">Informasi Barang</h5>

@@ -2,12 +2,11 @@
 
 @section('content')
 <div class="container">
-    <!-- Title and Breadcrumb -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Manajemen Materiil</h1>
         <nav>
             <a href="{{ route('dashboard') }}">Dashboard</a> > 
-            <a href="{{ route('barang.index') }}" class="text-decoration-none fw-bold">Stock Materiil</a>
+            <span>List Materiil</span>
         </nav>
     </div>
 

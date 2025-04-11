@@ -2,8 +2,12 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit Barang</h1>
-    <a href="{{ route('barang.index') }}" class="btn btn-secondary mb-3">Kembali</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Edit Materiil</h1>
+        <a href="{{ route('barang.index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </a>
+    </div>
 
     <form action="{{ route('barang.update', $barang->id) }}" method="POST" enctype="multipart/form-data">
         @csrf

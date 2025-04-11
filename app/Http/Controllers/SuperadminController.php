@@ -8,6 +8,7 @@ use App\Models\BarangKeluar;
 use App\Models\Gudang;
 use App\Models\User;
 use App\Models\Barang;
+use App\Models\Status;  
 
 class SuperadminController extends Controller
 {
@@ -17,6 +18,16 @@ class SuperadminController extends Controller
         $barangKeluarCount = BarangKeluar::sum('jumlah');
         $totalGudang = Gudang::count();
         $totalUsers = User::count();
+        $totalBarang = Barang::count();
+
+        $statusPerbaikan = Status::where('nama', 'Perbaikan')->first();
+
+        $totalBarangPerbaikan = 0;
+        if ($statusPerbaikan) {
+            $totalBarangPerbaikan = Barang::where('status_id', $statusPerbaikan->id)->count();
+        }
+
+        $barangSiapOperasi = $totalBarang - $barangKeluarCount - $totalBarangPerbaikan;
     
         $recentTransactions = BarangMasuk::with('barang:id,merk')
             ->select('barang_id', 'jumlah', \DB::raw("'Masuk' as status"), 'created_at')
@@ -32,7 +43,7 @@ class SuperadminController extends Controller
                 return $item;
             });
         
-        return view('superadmin.dashboard', compact('barangMasukCount', 'barangKeluarCount', 'totalGudang', 'totalUsers', 'recentTransactions'));
+        return view('superadmin.dashboard', compact('barangMasukCount', 'barangKeluarCount', 'totalGudang', 'totalUsers', 'recentTransactions', 'totalBarang', 'totalBarangPerbaikan', 'barangSiapOperasi'));
     }
 
     public function manageUsers()

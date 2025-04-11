@@ -7,6 +7,17 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-info">
                 <div class="inner">
+                    <h3>{{ $barangSiapOperasi }}</h3>
+                    <p>Barang Siap Operasi</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-sitemap"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
                     <h3>{{ $barangMasukCount }}</h3>
                     <p>Barang Masuk</p>
                 </div>
@@ -16,7 +27,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
+            <div class="small-box bg-danger">
                 <div class="inner">
                     <h3>{{ $barangKeluarCount }}</h3>
                     <p>Barang Keluar</p>
@@ -34,17 +45,6 @@
                 </div>
                 <div class="icon">
                     <i class="fas fa-warehouse"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    <h3>{{ $totalUsers }}</h3>
-                    <p>Total User</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-users"></i>
                 </div>
             </div>
         </div>
