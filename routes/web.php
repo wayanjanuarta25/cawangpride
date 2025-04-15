@@ -65,8 +65,12 @@ Route::middleware(['auth', 'role:superadmin|admin'])->group(function () {
     Route::get('/barang/export-all-pdf', [BarangController::class, 'exportAllPDF'])->name('barang.exportAllPDF');
     
     Route::resource('barang', BarangController::class);
+
     Route::resource('barang_masuk', BarangMasukController::class);
     Route::resource('barang_keluar', BarangKeluarController::class);
+
+    Route::get('/barang-keluar/{id}/info', [\App\Http\Controllers\BarangKeluarController::class, 'getBarangInfo']);
+
     Route::resource('gudang', GudangController::class);
     Route::resource('subjenis', SubJenisController::class);
     Route::resource('subsubjenis', SubSubJenisController::class);
